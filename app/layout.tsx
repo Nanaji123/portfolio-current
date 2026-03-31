@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { cn } from "@/lib/utils";
 import OnekoCat from "@/components/OnekoCat"
+import React from 'react'
 
 const fontSans = Geist({
   subsets: ["latin"],

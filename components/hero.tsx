@@ -17,6 +17,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { MorphingText } from "@/components/ui/morphing-text"
+import { motion } from "framer-motion"
 
 export type IconProps = React.HTMLAttributes<SVGElement>
 
@@ -95,15 +96,21 @@ const DATA = {
   },
 }
 export function Hero() {
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
-    <section className="relative flex min-h-[85svh] p-6 justify-center items-center overflow-hidden">
+    <section className="relative flex min-h-0 pt-40 sm:pt-64 pb-16 sm:pb-24 p-6 justify-center items-center overflow-hidden">
       {/* Vertical Dashed Lines (Matching Footer) */}
       <div className="absolute top-0 left-1/2 -translate-x-[600px] h-full w-[1px] border-l border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
       <div className="absolute top-0 right-1/2 translate-x-[600px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
 
       <Meteors number={15} />
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto min-w-0 flex flex-col gap-8 text-sm leading-loose items-start text-left lg:pl-10">
-        <div className="flex flex-col items-start gap-4">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto min-w-0 flex flex-col lg:flex-row items-center justify-between gap-12 lg:px-10 xl:px-16">
+        <div className="flex flex-col items-start gap-4 flex-1">
           <div className="inline-flex items-center gap-2 rounded-full border border-neutral-100 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600 dark:border-white/5 dark:bg-white/5 dark:text-neutral-400">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-900 opacity-75"></span>
@@ -112,77 +119,96 @@ export function Hero() {
             Always online
           </div>
 
-          <div className="flex flex-col gap-6 items-start">
-            <h1 className="flex items-center justify-start gap-x-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight dark:text-white leading-tight whitespace-nowrap">
-              <span className="shrink-0">I&apos;m a</span>
+          <div className="flex flex-col gap-6 items-start w-full">
+            <h1 className="flex flex-wrap items-center justify-start gap-x-3 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight dark:text-white leading-tight">
+              <span className="shrink-0 whitespace-nowrap">I&apos;m a</span>
               <MorphingText
-                className="text-left mx-0 h-10 sm:h-12 lg:h-14 text-3xl sm:text-4xl lg:text-5xl dark:text-white inline-block w-fit min-w-[300px]"
+                className="text-left mx-0 h-10 sm:h-12 lg:h-14 text-2xl sm:text-4xl lg:text-5xl dark:text-white inline-block w-fit min-w-[180px] sm:min-w-[300px] whitespace-nowrap"
                 texts={["Web Developer", "Mobile Developer", "Designer"]}
               />
             </h1>
 
             <div className="flex flex-col gap-2 max-w-xl items-start text-left">
-              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed">
+              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
                 Crafting seamless digital experiences across platforms.
               </p>
-              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed">
+              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
                 Combining design, development, and backend solutions.
               </p>
-              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed">
+              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
                 Building products that are fast, scalable, and intuitive.
               </p>
             </div>
           </div>
 
-          <div className="mt-8 flex flex-col items-start gap-4">
-            <TooltipProvider>
-              <Dock direction="middle" className="p-2 border border-neutral-200 bg-white/50 dark:border-white/10 dark:bg-black/50">
-                {DATA.navbar.map((item) => (
-                  <DockIcon key={item.label}>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Link
-                          href={item.href}
-                          aria-label={item.label}
-                          className={cn(
-                            buttonVariants({ variant: "ghost", size: "icon" }),
-                            "size-12 rounded-full"
-                          )}
-                        >
-                          <item.icon className="size-4" />
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{item.label}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </DockIcon>
-                ))}
-                <Separator orientation="vertical" className="h-full" />
-                {Object.entries(DATA.contact.social).map(([name, social]) => (
-                  <DockIcon key={name}>
-                    <Tooltip>
-                      <TooltipTrigger>
-                        <Link
-                          href={social.url}
-                          aria-label={social.name}
-                          className={cn(
-                            buttonVariants({ variant: "ghost", size: "icon" }),
-                            "size-12 rounded-full"
-                          )}
-                        >
-                          <social.icon className="size-4" />
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>{name}</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </DockIcon>
-                ))}
-              </Dock>
-            </TooltipProvider>
-          </div>
+          {mounted && (
+            <div className="mt-8 flex flex-col items-start gap-4">
+              <TooltipProvider>
+                <Dock direction="middle" className="p-2 border border-neutral-200 bg-white/50 dark:border-white/10 dark:bg-black/50">
+                  {DATA.navbar.map((item) => (
+                    <DockIcon key={item.label}>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Link
+                            href={item.href}
+                            aria-label={item.label}
+                            className={cn(
+                              buttonVariants({ variant: "ghost", size: "icon" }),
+                              "size-12 rounded-full"
+                            )}
+                          >
+                            <item.icon className="size-4" />
+                          </Link>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{item.label}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </DockIcon>
+                  ))}
+                  <Separator orientation="vertical" className="h-full" />
+                  {Object.entries(DATA.contact.social).map(([name, social]) => (
+                    <DockIcon key={name}>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Link
+                            href={social.url}
+                            aria-label={social.name}
+                            className={cn(
+                              buttonVariants({ variant: "ghost", size: "icon" }),
+                              "size-12 rounded-full"
+                            )}
+                          >
+                            <social.icon className="size-4" />
+                          </Link>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{name}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </DockIcon>
+                  ))}
+                </Dock>
+              </TooltipProvider>
+            </div>
+          )}
+        </div>
+
+        {/* Decorative Image */}
+        <div className="hidden lg:flex flex-1 justify-end items-center relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="relative"
+          >
+            <div className="absolute -inset-4 bg-gradient-to-tr from-neutral-200 to-transparent dark:from-white/10 dark:to-transparent rounded-3xl blur-2xl opacity-50" />
+            <img
+              src="/heropic.png"
+              alt="Profile Illustration"
+              className="relative z-10 w-full max-w-[600px] ml-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-500"
+            />
+          </motion.div>
         </div>
       </div>
     </section>
