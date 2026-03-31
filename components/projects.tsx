@@ -11,7 +11,7 @@ const PROJECTS_DATA = [
     title: "NoteSnap.app",
     subtitle: "AI Study Assistant",
     date: "June 2025",
-    tech: ["React.js", "Next.js", "Tailwind CSS", "OpenAI API"],
+    tech: ["React.js", "Next.js", "Tailwind CSS", "OpenAI SDK"],
     description: "Built an AI-powered platform that converts PDFs into flashcards, quizzes, summaries, and mind maps with concept extraction and spaced repetition features.",
     links: {
       website: "https://notesnap.app",
@@ -45,10 +45,10 @@ const PROJECTS_DATA = [
     color: "from-blue-600/20 to-transparent"
   },
   {
-    title: "System Game App",
+    title: "AI-Quest Game App",
     subtitle: "AI-Powered Gamified RPG Platform",
     date: "2025",
-    tech: ["React Native CLI", "Python FastAPI", "OpenAI API"],
+    tech: ["React Native CLI", "Python FastAPI", "OpenAI SDK"],
     description: "Built a gamified application with AI-generated quests, EXP systems, and a progression system where users track growth through ability points and AI-personalized feedback.",
     links: {},
     icon: <GameController size={24} weight="duotone" className="text-purple-500" />,
@@ -56,10 +56,10 @@ const PROJECTS_DATA = [
     color: "from-purple-500/20 to-transparent"
   },
   {
-    title: "Multi-Task App",
+    title: "SyncFlow",
     subtitle: "Chat + Tasks + AI Platform",
     date: "2025",
-    tech: ["React Native", "React", "Node.js", "Express", "AI APIs"],
+    tech: ["React Native", "React", "Node.js", "Express", "Ollama"],
     description: "Full-stack platform featuring real-time private/group chat, 2FA security, task management, and an AI interface for flashcard generation and persona-based conversations.",
     links: {},
     icon: <ChatCircleDots size={24} weight="duotone" className="text-blue-500" />,
@@ -77,10 +77,10 @@ export function Projects() {
   return (
     <section className="relative w-full overflow-hidden py-24 sm:py-32">
       {/* Vertical Dashed Lines (Matching Hero/Footer) */}
-      <div className="absolute top-0 left-1/2 -translate-x-[512px] h-full w-[1px] border-l border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
-      <div className="absolute top-0 right-1/2 translate-x-[512px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
+      <div className="absolute top-0 left-1/2 -translate-x-[600px] h-full w-[1px] border-l border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
+      <div className="absolute top-0 right-1/2 translate-x-[600px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
 
-      <div className="mx-auto max-w-5xl px-6 lg:pl-12 relative z-10">
+      <div className="mx-auto max-w-[1200px] px-6 relative z-10">
         <div className="flex flex-col gap-4 mb-16 items-start text-left">
           <h2 className="text-xl font-bold tracking-tight text-black dark:text-white uppercase px-1 border-l-4 border-neutral-900 dark:border-white">
             Projects

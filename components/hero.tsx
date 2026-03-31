@@ -96,13 +96,13 @@ const DATA = {
 }
 export function Hero() {
   return (
-    <section className="relative flex min-h-svh p-6 lg:p-24 items-center overflow-hidden">
+    <section className="relative flex min-h-[85svh] p-6 justify-center items-center overflow-hidden">
       {/* Vertical Dashed Lines (Matching Footer) */}
-      <div className="absolute top-0 left-1/2 -translate-x-[576px] h-full w-[1px] border-l border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
-      <div className="absolute top-0 right-1/2 translate-x-[576px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
+      <div className="absolute top-0 left-1/2 -translate-x-[600px] h-full w-[1px] border-l border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
+      <div className="absolute top-0 right-1/2 translate-x-[600px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
 
       <Meteors number={15} />
-      <div className="relative z-10 flex max-w-5xl min-w-0 flex-col gap-8 text-sm leading-loose items-start text-left lg:pl-24">
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto min-w-0 flex flex-col gap-8 text-sm leading-loose items-start text-left lg:pl-10">
         <div className="flex flex-col items-start gap-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-neutral-100 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600 dark:border-white/5 dark:bg-white/5 dark:text-neutral-400">
             <span className="relative flex h-2 w-2">
