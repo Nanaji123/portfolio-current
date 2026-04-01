@@ -1,6 +1,5 @@
 import { Hero } from "@/components/hero"
 import { About } from "@/components/about"
-import { ProgressiveBlur } from "@/components/ui/progressive-blur"
 import { TechStack } from "@/components/tech-stack"
 import { Experience } from "@/components/experience"
 import { Projects } from "@/components/projects"
@@ -14,8 +13,7 @@ export default function Page() {
       <Experience />
       <Projects />
 
-      {/* Global Scroll Transitions */}
-      <ProgressiveBlur height="15svh" position="bottom" className="fixed bottom-0 z-[100] opacity-80 dark:opacity-50 pointer-events-none" />
+
 
       {/* Quote Section (matching reference) */}
       <section className="mx-auto max-w-5xl px-6 py-24 text-center pb-40">

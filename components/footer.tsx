@@ -13,12 +13,17 @@ const SOCIAL_LINKS = [
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/nanaji-gundapu",
+    url: "https://www.linkedin.com/in/nanaji-gundapu-ab5935264/",
     icon: <LinkedinLogo size={20} weight="duotone" />
   },
   {
+    name: "X",
+    url: "https://x.com/GNanaji9",
+    icon: <TwitterLogo size={20} weight="duotone" />
+  },
+  {
     name: "Instagram",
-    url: "https://instagram.com/nanaji_gundapu",
+    url: "https://www.instagram.com/arjun0070__/",
     icon: <InstagramLogo size={20} weight="duotone" />
   },
   {
@@ -30,16 +35,17 @@ const SOCIAL_LINKS = [
 
 const NAV_LINKS = [
   { name: "Home", url: "/" },
-  { name: "Experience", url: "#experience" },
-  { name: "Projects", url: "#projects" },
-  { name: "Contact", url: "mailto:nanajigundapu@gmail.com" }
+  { name: "Experience", url: "/work" },
+  { name: "Projects", url: "/projects" },
+  { name: "Blogs", url: "/blogs" },
+  { name: "Contact", url: "mailto:gundapunanaji123@gmail.com" }
 ]
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative w-full bg-white dark:bg-black overflow-hidden pt-24 pb-12">
+    <footer className="relative w-full overflow-hidden pt-24 pb-12">
       {/* Top Border - High Visibility Dashed */}
       <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-neutral-400 dark:via-white/40 to-transparent border-t border-dashed border-neutral-300 dark:border-white/30" />
 
@@ -68,10 +74,10 @@ export function Footer() {
                 <motion.a
                   key={social.name}
                   href={social.url}
-                  target="_blank"
+                  target={social.url.startsWith("mailto:") ? undefined : "_blank"}
                   rel="noopener noreferrer"
                   whileHover={{ y: -2 }}
-                  className="p-2.5 rounded-xl bg-neutral-50 dark:bg-white/5 border border-neutral-100 dark:border-white/5 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors"
+                  className="p-2.5 rounded-xl bg-neutral-50 dark:bg-white/5 border border-neutral-100 dark:border-white/5 text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:border-white transition-all"
                 >
                   {social.icon}
                 </motion.a>
@@ -83,18 +89,22 @@ export function Footer() {
           <div className="flex flex-col gap-6">
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">Navigation</h4>
             <div className="flex flex-col gap-4">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.url}
-                  className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group"
-                >
-                  {link.name}
-                  {link.url.startsWith("http") || link.url.startsWith("mailto") ? (
-                    <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
-                  ) : null}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const isExternal = link.url.startsWith("http") || link.url.startsWith("mailto:")
+                const Comp = isExternal ? "a" : Link
+                return (
+                  <Comp
+                    key={link.name}
+                    href={link.url}
+                    className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group w-fit"
+                  >
+                    {link.name}
+                    {isExternal ? (
+                      <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                    ) : null}
+                  </Comp>
+                )
+              })}
             </div>
           </div>
 
@@ -104,9 +114,9 @@ export function Footer() {
             <div className="flex flex-col gap-4">
               <a
                 href="mailto:gundapunanaji123@gmail.com"
-                className="group flex items-center justify-between px-5 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black transition-all hover:scale-105 active:scale-95"
+                className="group flex items-center justify-between gap-4 px-6 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black transition-all hover:scale-105 active:scale-95 w-fit shadow-xl shadow-black/5"
               >
-                <span className="text-sm font-bold uppercase tracking-widest">Tap to connect</span>
+                <span className="text-sm font-bold uppercase tracking-widest whitespace-nowrap">Tap to connect</span>
                 <ArrowUpRight size={18} weight="bold" className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
               <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed font-medium">

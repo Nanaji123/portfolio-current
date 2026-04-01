@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import {
   Tooltip,
   TooltipContent,
@@ -31,6 +31,7 @@ export function Navbar() {
         <div className="hidden items-center gap-6 md:flex">
           {[
             { name: "Home", href: "/" },
+            { name: "Blogs", href: "/blogs" },
             { name: "Projects", href: "/projects" },
             { name: "Work", href: "/work" },
           ].map((item) => (
@@ -48,7 +49,7 @@ export function Navbar() {
         </div>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
+          <AnimatedThemeToggler />
           <Link
             href="#contact"
             className="rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm font-medium text-black transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-black dark:text-white dark:hover:bg-neutral-900"

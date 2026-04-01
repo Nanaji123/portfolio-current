@@ -3,6 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import { CalendarIcon, HomeIcon, MailIcon, PencilIcon, Search, Settings } from "lucide-react"
+import { usePathname } from "next/navigation"
 
 
 import { cn } from "@/lib/utils"
@@ -67,29 +68,29 @@ const Icons = {
 
 const DATA = {
   navbar: [
-    { href: "#", icon: HomeIcon, label: "Home" },
-    { href: "#", icon: PencilIcon, label: "Blog" },
+    { href: "/", icon: HomeIcon, label: "Home" },
+    { href: "/blogs", icon: PencilIcon, label: "Blog" },
   ],
   contact: {
     social: {
       GitHub: {
         name: "GitHub",
-        url: "#",
+        url: "https://github.com/Nanaji123",
         icon: Icons.github,
       },
       LinkedIn: {
         name: "LinkedIn",
-        url: "#",
+        url: "https://www.linkedin.com/in/nanaji-gundapu-ab5935264/",
         icon: Icons.linkedin,
       },
       X: {
         name: "X",
-        url: "#",
+        url: "https://x.com/GNanaji9",
         icon: Icons.x,
       },
       email: {
         name: "Send Email",
-        url: "#",
+        url: "mailto:gundapunanaji123@gmail.com",
         icon: Icons.email,
       },
     },
@@ -97,6 +98,7 @@ const DATA = {
 }
 export function Hero() {
   const [mounted, setMounted] = React.useState(false);
+  const pathname = usePathname();
 
   React.useEffect(() => {
     setMounted(true);
@@ -145,49 +147,61 @@ export function Hero() {
             <div className="mt-8 flex flex-col items-start gap-4">
               <TooltipProvider>
                 <Dock direction="middle" className="p-2 border border-neutral-200 bg-white/50 dark:border-white/10 dark:bg-black/50">
-                  {DATA.navbar.map((item) => (
-                    <DockIcon key={item.label}>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Link
-                            href={item.href}
-                            aria-label={item.label}
-                            className={cn(
-                              buttonVariants({ variant: "ghost", size: "icon" }),
-                              "size-12 rounded-full"
-                            )}
-                          >
-                            <item.icon className="size-4" />
-                          </Link>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{item.label}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </DockIcon>
-                  ))}
-                  <Separator orientation="vertical" className="h-full" />
-                  {Object.entries(DATA.contact.social).map(([name, social]) => (
-                    <DockIcon key={name}>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Link
-                            href={social.url}
-                            aria-label={social.name}
-                            className={cn(
-                              buttonVariants({ variant: "ghost", size: "icon" }),
-                              "size-12 rounded-full"
-                            )}
-                          >
-                            <social.icon className="size-4" />
-                          </Link>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{name}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </DockIcon>
-                  ))}
+                  {DATA.navbar.map((item) => {
+                    const isActive = pathname === item.href
+                    return (
+                      <DockIcon key={item.label}>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Link
+                              href={item.href}
+                              aria-label={item.label}
+                              className={cn(
+                                buttonVariants({ variant: "ghost", size: "icon" }),
+                                "size-12 rounded-full transition-all relative",
+                                isActive && "bg-neutral-100 dark:bg-white/10 text-black dark:text-white"
+                              )}
+                            >
+                              <item.icon className={cn("size-4", isActive && "scale-110")} />
+                              {isActive && (
+                                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black dark:bg-white" />
+                              )}
+                            </Link>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>{item.label}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </DockIcon>
+                    )
+                  })}
+                  <Separator orientation="vertical" className="h-full mx-2" />
+                  {Object.entries(DATA.contact.social).map(([name, social]) => {
+                    const isExternal = social.url.startsWith("http") || social.url.startsWith("mailto:")
+                    const Comp = isExternal ? "a" : Link
+                    return (
+                      <DockIcon key={name}>
+                        <Tooltip>
+                          <TooltipTrigger>
+                            <Comp
+                              href={social.url}
+                              aria-label={social.name}
+                              className={cn(
+                                buttonVariants({ variant: "ghost", size: "icon" }),
+                                "size-12 rounded-full"
+                              )}
+                              {...(isExternal ? { target: social.url.startsWith("mailto:") ? undefined : "_blank", rel: "noopener noreferrer" } : {})}
+                            >
+                              <social.icon className="size-4" />
+                            </Comp>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>{name}</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </DockIcon>
+                    )
+                  })}
                 </Dock>
               </TooltipProvider>
             </div>
@@ -195,10 +209,10 @@ export function Hero() {
         </div>
 
         {/* Decorative Image */}
-        <div className="hidden lg:flex flex-1 justify-end items-center relative">
+        <div className="flex flex-1 justify-center lg:justify-end items-center relative order-first lg:order-last mb-12 lg:mb-0">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: 20 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
             className="relative"
           >
@@ -206,7 +220,7 @@ export function Hero() {
             <img
               src="/heropic.png"
               alt="Profile Illustration"
-              className="relative z-10 w-full max-w-[600px] ml-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-500"
+              className="relative z-10 w-full max-w-[300px] sm:max-w-[450px] lg:max-w-[600px] ml-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-500"
             />
           </motion.div>
         </div>

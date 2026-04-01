@@ -50,7 +50,9 @@ const PROJECTS_DATA = [
     date: "2025",
     tech: ["React Native CLI", "Python FastAPI", "OpenAI SDK"],
     description: "Built a gamified application with AI-generated quests, EXP systems, and a progression system where users track growth through ability points and AI-personalized feedback.",
-    links: {},
+    links: {
+      github: "https://github.com/Nanaji123/AI-Quest-App.git",
+    },
     icon: <GameController size={24} weight="duotone" className="text-purple-500" />,
     stats: "AI Quests • RPG System",
     color: "from-purple-500/20 to-transparent"
@@ -61,7 +63,9 @@ const PROJECTS_DATA = [
     date: "2025",
     tech: ["React Native", "React", "Node.js", "Express", "Ollama"],
     description: "Full-stack platform featuring real-time private/group chat, 2FA security, task management, and an AI interface for flashcard generation and persona-based conversations.",
-    links: {},
+    links: {
+      github: "https://github.com/Nanaji123/SyncFlow.git",
+    },
     icon: <ChatCircleDots size={24} weight="duotone" className="text-blue-500" />,
     stats: "Real-time Chat • AI Flashcards",
     color: "from-blue-500/20 to-transparent"
@@ -97,9 +101,10 @@ export function Projects() {
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
+              whileHover={{ scale: 1.02, y: -5 }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
               viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.1 }}
-              className={`group relative flex flex-col p-8 rounded-2xl border border-neutral-100 bg-neutral-50/50 dark:border-white/5 dark:bg-white/[0.02] hover:border-neutral-200 dark:hover:border-white/10 transition-all overflow-hidden ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"
+              className={`group relative flex flex-col p-8 rounded-2xl border border-neutral-100 dark:border-white/5 hover:border-neutral-200 dark:hover:border-white/10 transition-all overflow-hidden cursor-pointer ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"
                 }`}
             >
               {/* Background Glow */}
@@ -142,7 +147,7 @@ export function Projects() {
                 <div className="mt-auto">
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((t) => (
-                      <span key={t} className="text-[11px] font-bold px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/5 text-neutral-500 dark:text-neutral-400 border border-neutral-200/50 dark:border-white/5">
+                      <span key={t} className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/5 text-neutral-500 dark:text-neutral-400 border border-neutral-200/50 dark:border-white/5 hover:border-black dark:hover:border-white transition-all cursor-default">
                         {t}
                       </span>
                     ))}

@@ -2,7 +2,6 @@
 
 import React from "react"
 import { motion } from "framer-motion"
-import { Highlighter } from "@/components/ui/highlighter"
 
 export function About() {
   return (
@@ -28,31 +27,12 @@ export function About() {
 
           <div className="flex flex-col gap-8">
             <p className="text-2xl sm:text-3xl font-medium leading-tight text-neutral-800 dark:text-neutral-200">
-              I&apos;m a{" "}
-              <Highlighter action="underline" color="#FF9800">
-                Mobile App Developer
-              </Highlighter>{" "}
-              and{" "}
-              <Highlighter action="underline" color="#3b82f6">
-                Web Developer
-              </Highlighter>{" "}
-              experienced in building cross-platform applications for Android, iOS, and the web.
+              I&apos;m a <span className="text-black dark:text-white font-semibold underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Mobile App Developer</span> and <span className="text-black dark:text-white font-semibold underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Web Developer</span> experienced in building cross-platform applications for Android, iOS, and the web.
             </p>
 
             <div className="space-y-6 text-neutral-600 dark:text-neutral-400 text-lg sm:text-xl leading-relaxed">
               <p>
-                I specialize in creating scalable and user-focused solutions using modern technologies. I develop mobile apps with{" "}
-                <Highlighter action="highlight" color="#00DC82" className="dark:text-black uppercase text-base px-1">
-                  React Native
-                </Highlighter>{" "}
-                and build web applications alongside backend services using{" "}
-                <Highlighter action="highlight" color="#3b82f6" className="dark:text-black uppercase text-base px-1">
-                  Node.js (Express)
-                </Highlighter>{" "}
-                and{" "}
-                <Highlighter action="highlight" color="#a855f7" className="dark:text-black uppercase text-base px-1">
-                  Python FastAPI
-                </Highlighter>.
+                I specialize in creating scalable and user-focused solutions using modern technologies. I develop mobile apps with <span className="text-black dark:text-white font-medium">React Native</span> and build web applications alongside backend services using <span className="text-black dark:text-white font-medium">Node.js (Express)</span> and <span className="text-black dark:text-white font-medium">Python FastAPI</span>.
               </p>
               <p>
                 I also handle the design side of my projects, creating interfaces from initial sketches to Figma designs, ensuring both functionality and user experience go hand in hand. I enjoy working across the full stack and bringing ideas to life through real-world applications.
@@ -66,7 +46,7 @@ export function About() {
               </div>
               <div>
                 <p className="text-xs text-neutral-400 dark:text-neutral-600 uppercase tracking-widest mb-2 font-bold">Location</p>
-                <p className="text-base font-medium text-neutral-800 dark:text-neutral-200">Kakinada, Andhra Pradesh</p>
+                <p className="text-base font-medium text-neutral-800 dark:text-neutral-200">Visakapatnam, Andhra Pradesh</p>
               </div>
             </div>
           </div>
