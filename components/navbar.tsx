@@ -1,9 +1,10 @@
 "use client"
 
-import * as React from "react"
+import React, { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { ContactModal } from "./contact-modal"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
 import {
   Tooltip,
@@ -14,19 +15,20 @@ import {
 
 export function Navbar() {
   const pathname = usePathname()
+  const [isContactOpen, setIsContactOpen] = useState(false)
 
   return (
-    <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-2xl px-4">
+    <header className="fixed top-6 left-0 right-0 z-50 mx-auto w-[95%] max-w-2xl">
       <nav className="flex items-center justify-between rounded-full border border-neutral-200 bg-white/80 p-2 shadow-sm backdrop-blur-md transition-colors dark:border-white/10 dark:bg-black/50">
-        <div className="flex items-center gap-3 pl-2">
+        <a href="/" className="flex items-center gap-3 pl-2 group cursor-pointer relative z-10">
           {/* Avatar Placeholder */}
           <div className="h-8 w-8 overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
             <div className="flex h-full w-full items-center justify-center text-[10px] font-bold text-neutral-400">
               ME
             </div>
           </div>
-          <span className="text-sm font-semibold text-black dark:text-white">Nanaji gundapu</span>
-        </div>
+          <span className="text-sm font-semibold text-black dark:text-white group-hover:opacity-80 transition-opacity">Nanaji gundapu</span>
+        </a>
 
         <div className="hidden items-center gap-6 md:flex">
           {[
@@ -50,14 +52,16 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <AnimatedThemeToggler />
-          <Link
-            href="#contact"
-            className="rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm font-medium text-black transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-black dark:text-white dark:hover:bg-neutral-900"
+          <button
+            onClick={() => setIsContactOpen(true)}
+            className="rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm font-medium text-black transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-black dark:text-white dark:hover:bg-neutral-900 cursor-pointer"
           >
             Contact
-          </Link>
+          </button>
         </div>
       </nav>
+
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </header>
   )
 }

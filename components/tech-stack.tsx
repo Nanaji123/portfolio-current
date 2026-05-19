@@ -14,45 +14,53 @@ const TECH_DATA = [
   {
     title: "App Development",
     icon: DeviceMobile,
-    description: "Building high-performance cross-platform mobile applications.",
+    description: "Building high-performance native and cross-platform mobile applications.",
     skills: [
       { name: "React Native", icon: "react" },
+      { name: "Kotlin", icon: "kotlin" },
+      { name: "Jetpack Compose", icon: "android" },
       { name: "Expo", icon: "expo" },
-      { name: "Android", icon: "android" },
-      { name: "iOS", icon: "apple" }
+      { name: "Redux Toolkit", icon: "redux" },
+      { name: "Android SDK", icon: "android" }
     ]
   },
   {
-    title: "Web Development",
+    title: "Web & Frontend",
     icon: Globe,
-    description: "Crafting responsive, high-speed web applications with modern frameworks.",
+    description: "Crafting modern, fast, and interactive user interfaces.",
     skills: [
       { name: "Next.js", icon: "nextdotjs" },
-      { name: "React", icon: "react" },
+      { name: "React.js", icon: "react" },
       { name: "TypeScript", icon: "typescript" },
-      { name: "Tailwind CSS", icon: "tailwindcss" }
+      { name: "Tailwind CSS", icon: "tailwindcss" },
+      { name: "Framer Motion", icon: "framer" },
+      { name: "JavaScript", icon: "javascript" }
     ]
   },
   {
     title: "Backend & Systems",
     icon: Database,
-    description: "Architecting scalable server-side solutions and robust databases.",
+    description: "Designing robust, scalable backend architectures and APIs.",
     skills: [
       { name: "Node.js", icon: "nodedotjs" },
-      { name: "Python", icon: "python" },
-      { name: "MongoDB", icon: "mongodb" },
-      { name: "PostgreSQL", icon: "postgresql" }
+      { name: "Express.js", icon: "express" },
+      { name: "FastAPI", icon: "fastapi" },
+      { name: "PostgreSQL", icon: "postgresql" },
+      { name: "Prisma", icon: "prisma" },
+      { name: "Python", icon: "python" }
     ]
   },
   {
-    title: "Design & UX",
+    title: "Real-time & Tools",
     icon: FigmaLogo,
-    description: "Designing intuitive interfaces and seamless user journeys.",
+    description: "Handling real-time communication, cloud deployment, and monitoring.",
     skills: [
+      { name: "AWS", icon: "amazonwebservices" },
+      { name: "Socket.IO", icon: "socketdotio" },
+      { name: "WebRTC", icon: "webrtc" },
+      { name: "Splunk", icon: "splunk" },
       { name: "Figma", icon: "figma" },
-      { name: "UI/UX Design", icon: "adobe" },
-      { name: "Wireframing", icon: "framer" },
-      { name: "Prototyping", icon: "sketch" }
+      { name: "GitHub", icon: "github" }
     ]
   }
 ]
@@ -92,13 +100,13 @@ export function TechStack() {
           className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-0"
         >
           {TECH_DATA.map((item) => (
-            <CardContainer key={item.title} className="inter-var" containerClassName="py-4 md:py-8">
-              <CardBody className="bg-neutral-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.1] dark:bg-black dark:border-white/[0.1] border-black/[0.1] w-full sm:w-[30rem] h-auto rounded-2xl p-7 border hover:bg-neutral-100 dark:hover:bg-neutral-900/50 transition-colors">
+            <CardContainer key={item.title} className="inter-var w-full" containerClassName="py-4 md:py-8 w-full">
+              <CardBody className="bg-neutral-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-neutral-500/[0.05] dark:bg-[#050505] dark:border-white/5 border-neutral-200/80 w-full h-full rounded-3xl p-8 border hover:bg-neutral-100/50 dark:hover:bg-white/[0.02] transition-all duration-300">
                 <CardItem
                   translateZ="50"
                   className="flex items-center gap-3 text-xl font-bold text-neutral-900 dark:text-white"
                 >
-                  <div className="p-2.5 rounded-xl bg-white dark:bg-white/10 shadow-sm border border-neutral-100 dark:border-white/10">
+                  <div className="p-2.5 rounded-xl bg-white dark:bg-white/5 shadow-sm border border-neutral-100 dark:border-white/5 group-hover/card:scale-105 transition-transform duration-300">
                     <item.icon size={24} weight="duotone" className="text-neutral-900 dark:text-white" />
                   </div>
                   {item.title}
@@ -107,22 +115,22 @@ export function TechStack() {
                 <CardItem
                   as="p"
                   translateZ="60"
-                  className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed mt-4"
+                  className="text-neutral-500 dark:text-neutral-400 text-sm leading-relaxed mt-4"
                 >
                   {item.description}
                 </CardItem>
 
-                <div className="grid grid-cols-2 gap-2.5 mt-8">
+                <div className="grid grid-cols-2 gap-3 mt-8">
                   {item.skills.map((skill, idx) => (
                     <CardItem
                       key={skill.name}
                       translateZ={30 + idx * 5}
-                      className="flex items-center gap-2 px-3.5 py-2.5 rounded-lg bg-white border border-neutral-100 text-[13px] font-medium text-neutral-800 dark:bg-white/5 dark:border-white/5 dark:text-neutral-300 hover:border-neutral-300 dark:hover:border-white/20 transition-all shadow-sm"
+                      className="flex items-center gap-2.5 px-4 py-3 rounded-xl bg-white border border-neutral-100 text-[13px] font-semibold text-neutral-800 dark:bg-white/[0.02] dark:border-white/5 dark:text-neutral-300 hover:border-neutral-300 dark:hover:border-white/20 transition-all shadow-sm hover:shadow-md group/skill"
                     >
                       <img
                         src={`https://cdn.simpleicons.org/${skill.icon}`}
                         alt={skill.name}
-                        className="w-4 h-4 dark:filter dark:invert dark:brightness-200"
+                        className="w-4 h-4 opacity-60 dark:opacity-80 transition-all group-hover/skill:opacity-100 grayscale brightness-0 dark:invert"
                       />
                       {skill.name}
                     </CardItem>

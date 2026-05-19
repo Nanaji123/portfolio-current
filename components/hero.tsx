@@ -126,19 +126,19 @@ export function Hero() {
               <span className="shrink-0 whitespace-nowrap">I&apos;m a</span>
               <MorphingText
                 className="text-left mx-0 h-10 sm:h-12 lg:h-14 text-2xl sm:text-4xl lg:text-5xl dark:text-white inline-block w-fit min-w-[180px] sm:min-w-[300px] whitespace-nowrap"
-                texts={["Web Developer", "Mobile Developer", "Designer"]}
+                texts={["Mobile App Developer", "Full-Stack Developer", "Web Developer"]}
               />
             </h1>
 
             <div className="flex flex-col gap-2 max-w-xl items-start text-left">
               <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
-                Crafting seamless digital experiences across platforms.
+                Engineering high-performance, cross-platform mobile and web applications.
               </p>
               <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
-                Combining design, development, and backend solutions.
+                Architecting robust backend services, real-time systems, and scalable APIs.
               </p>
               <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
-                Building products that are fast, scalable, and intuitive.
+                Combining clean architectures with fluid, high-fidelity user experiences.
               </p>
             </div>
           </div>
@@ -204,6 +204,36 @@ export function Hero() {
                   })}
                 </Dock>
               </TooltipProvider>
+              <a
+                href="https://drive.google.com/file/d/1H2iOvaxKD_ZDwkcnJklMbDWK9M6QQN8g/view?usp=drive_link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-3 px-6 py-3 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
+              >
+                {/* Gradient border via pseudo background */}
+                <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-neutral-800 via-neutral-600 to-neutral-800 dark:from-white/20 dark:via-white/10 dark:to-white/20 p-[1.5px]">
+                  <span className="absolute inset-[1.5px] rounded-[14px] bg-white dark:bg-[#0a0a0a]" />
+                </span>
+                {/* Shimmer sweep on hover */}
+                <span className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[linear-gradient(105deg,transparent_40%,rgba(0,0,0,0.06)_50%,transparent_60%)] dark:bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.06)_50%,transparent_60%)] bg-[length:200%_100%] animate-[shimmer_1.5s_infinite]" />
+                {/* Icon */}
+                <span className="relative z-10 flex items-center justify-center w-7 h-7 rounded-lg bg-black dark:bg-white group-hover:scale-110 transition-transform duration-300 shadow-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5 text-white dark:text-black group-hover:translate-y-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
+                  </svg>
+                </span>
+                {/* Text */}
+                <span className="relative z-10 flex flex-col items-start leading-none">
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-400 dark:text-neutral-500">View / Download</span>
+                  <span className="text-sm font-black uppercase tracking-wider text-black dark:text-white mt-0.5">Resume / CV</span>
+                </span>
+                {/* Arrow */}
+                <span className="relative z-10 ml-1 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-black dark:text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </a>
             </div>
           )}
         </div>

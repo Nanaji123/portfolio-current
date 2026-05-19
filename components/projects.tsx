@@ -2,11 +2,35 @@
 
 import React from "react"
 import { motion } from "framer-motion"
-import { ArrowSquareOut, Sparkle, Layout, GameController, ChatCircleDots, Users } from "@phosphor-icons/react"
-import { GithubLogo } from "@phosphor-icons/react"
-import { Android } from "@/components/ui/android"
+import { ArrowSquareOut, Sparkle, Layout, GameController, ChatCircleDots, AndroidLogo, GithubLogo } from "@phosphor-icons/react"
 
 const PROJECTS_DATA = [
+  {
+    title: "SyncFlow",
+    subtitle: "Real-Time Chat & AI Platform",
+    date: "2026",
+    tech: ["React Native", "React.js", "Node.js", "Socket.IO", "Ollama AI"],
+    description: "Built a scalable real-time collaboration platform with private/group messaging using Socket.IO and integrated Ollama-based AI workflows for chat assistance and task automation. Implemented secure JWT + 2FA authentication.",
+    links: {
+      github: "https://github.com/Nanaji123/SyncFlow.git",
+    },
+    icon: <ChatCircleDots size={24} weight="duotone" className="text-blue-500" />,
+    stats: "Real-time Chat • Local AI",
+    color: "from-blue-500/20 to-transparent"
+  },
+  {
+    title: "ChronoScape",
+    subtitle: "Dynamic Wallpaper Engine",
+    date: "2026",
+    tech: ["Kotlin", "MVVM Architecture", "Android SDK", "Wallpaper Service"],
+    description: "Developed an Android live wallpaper application using Kotlin with MVVM architecture. Implemented time-based environment transitions and dynamic weather rendering with smooth native performance animations.",
+    links: {
+      github: "https://github.com/Nanaji123/chronoscape1",
+    },
+    icon: <AndroidLogo size={24} weight="duotone" className="text-emerald-500" />,
+    stats: "Android Native • Kotlin MVVM",
+    color: "from-emerald-500/20 to-transparent"
+  },
   {
     title: "NoteSnap.app",
     subtitle: "AI Study Assistant",
@@ -19,30 +43,6 @@ const PROJECTS_DATA = [
     icon: <Sparkle size={24} weight="duotone" className="text-amber-500" />,
     stats: "OpenAI API • PDF Parsing",
     color: "from-amber-500/20 to-transparent"
-  },
-  {
-    title: "Tuni Basket",
-    subtitle: "Grocery Web & Mobile App",
-    date: "Dec 2024",
-    tech: ["Figma", "React", "React Native", "Node.js"],
-    description: "Designed UI/UX and built a cross-platform grocery platform with AI-powered product recommendations and personalized features independently.",
-    links: {
-      github: "https://github.com/Nanaji123/tuniwebsite",
-    },
-    icon: <Layout size={24} weight="duotone" className="text-emerald-500" />,
-    stats: "UI/UX Design • Cross-Platform",
-    color: "from-emerald-500/20 to-transparent"
-  },
-  {
-    title: "Customer Portal",
-    subtitle: "Enterprise Client Dashboard",
-    date: "2024",
-    tech: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
-    description: "Architected a high-performance customer portal for business management, featuring real-time analytics, automated reporting, and secure document sharing.",
-    links: {},
-    icon: <Users size={24} weight="duotone" className="text-blue-600" />,
-    stats: "Enterprise • CRM System",
-    color: "from-blue-600/20 to-transparent"
   },
   {
     title: "AI-Quest Game App",
@@ -58,17 +58,17 @@ const PROJECTS_DATA = [
     color: "from-purple-500/20 to-transparent"
   },
   {
-    title: "SyncFlow",
-    subtitle: "Chat + Tasks + AI Platform",
-    date: "2025",
-    tech: ["React Native", "React", "Node.js", "Express", "Ollama"],
-    description: "Full-stack platform featuring real-time private/group chat, 2FA security, task management, and an AI interface for flashcard generation and persona-based conversations.",
+    title: "Tuni Basket",
+    subtitle: "Grocery Web & Mobile App",
+    date: "Dec 2024",
+    tech: ["Figma", "React", "React Native", "Node.js"],
+    description: "Designed UI/UX and built a cross-platform grocery platform with AI-powered product recommendations and personalized features independently.",
     links: {
-      github: "https://github.com/Nanaji123/SyncFlow.git",
+      github: "https://github.com/Nanaji123/tuniwebsite",
     },
-    icon: <ChatCircleDots size={24} weight="duotone" className="text-blue-500" />,
-    stats: "Real-time Chat • AI Flashcards",
-    color: "from-blue-500/20 to-transparent"
+    icon: <Layout size={24} weight="duotone" className="text-pink-500" />,
+    stats: "UI/UX Design • Cross-Platform",
+    color: "from-pink-500/20 to-transparent"
   }
 ]
 
@@ -85,12 +85,23 @@ export function Projects() {
       <div className="absolute top-0 right-1/2 translate-x-[600px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
 
       <div className="mx-auto max-w-[1200px] px-6 relative z-10">
-        <div className="flex flex-col gap-4 mb-16 items-start text-left">
-          <h2 className="text-xl font-bold tracking-tight text-black dark:text-white uppercase px-1 border-l-4 border-neutral-900 dark:border-white">
+        <div className="flex flex-col gap-6 mb-24 max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-3"
+          >
+            <span className="h-[2px] w-12 bg-black dark:bg-white" />
+            <span className="text-sm font-bold tracking-[0.2em] uppercase text-black dark:text-white">
+              Creative Works
+            </span>
+          </motion.div>
+          <h2 className="text-4xl sm:text-6xl font-black tracking-tighter text-black dark:text-white uppercase transition-colors">
             Projects
           </h2>
-          <p className="text-neutral-500 dark:text-neutral-400 text-lg max-w-2xl">
-            Highlighted works spanning AI-driven applications, real-time platforms, and enterprise solutions.
+          <p className="text-neutral-600 dark:text-neutral-400 text-lg sm:text-xl leading-relaxed">
+            Highlighted works spanning AI-driven applications, real-time platforms, and mobile products.
           </p>
         </div>
 
@@ -101,10 +112,10 @@ export function Projects() {
               variants={cardVariants}
               initial="hidden"
               whileInView="visible"
-              whileHover={{ scale: 1.02, y: -5 }}
-              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              whileHover={{ scale: 1.015, y: -4 }}
+              transition={{ type: "spring", stiffness: 300, damping: 22 }}
               viewport={{ once: true, margin: "-50px" }}
-              className={`group relative flex flex-col p-8 rounded-2xl border border-neutral-100 dark:border-white/5 hover:border-neutral-200 dark:hover:border-white/10 transition-all overflow-hidden cursor-pointer ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"
+              className={`group relative flex flex-col p-8 rounded-3xl border border-neutral-200/60 dark:border-white/5 bg-neutral-50/40 dark:bg-white/[0.01] hover:bg-neutral-50/80 dark:hover:bg-white/[0.03] transition-all overflow-hidden cursor-pointer ${index < 3 ? "lg:col-span-2" : "lg:col-span-3"
                 }`}
             >
               {/* Background Glow */}
@@ -112,17 +123,17 @@ export function Projects() {
 
               <div className="flex flex-col h-full relative z-10">
                 <div className="flex items-center justify-between mb-8">
-                  <div className="p-3 rounded-2xl bg-white dark:bg-white/10 shadow-sm border border-neutral-100 dark:border-white/10 group-hover:rotate-12 transition-transform duration-500">
+                  <div className="p-3.5 rounded-2xl bg-white dark:bg-white/5 shadow-sm border border-neutral-100 dark:border-white/5 group-hover:rotate-6 group-hover:scale-105 transition-transform duration-500">
                     {project.icon}
                   </div>
                   <div className="flex items-center gap-2">
                     {project.links.github && (
-                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-white dark:bg-white/10 hover:bg-neutral-100 dark:hover:bg-white/20 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-all border border-neutral-100 dark:border-white/10">
+                      <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-white dark:bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-all border border-neutral-100 dark:border-white/5">
                         <GithubLogo size={20} weight="bold" />
                       </a>
                     )}
                     {project.links.website && (
-                      <a href={project.links.website} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-white dark:bg-white/10 hover:bg-neutral-100 dark:hover:bg-white/20 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-all border border-neutral-100 dark:border-white/10">
+                      <a href={project.links.website} target="_blank" rel="noopener noreferrer" className="p-2.5 rounded-xl bg-white dark:bg-white/5 hover:bg-neutral-100 dark:hover:bg-white/10 text-neutral-500 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-all border border-neutral-100 dark:border-white/5">
                         <ArrowSquareOut size={20} weight="bold" />
                       </a>
                     )}
@@ -135,26 +146,26 @@ export function Projects() {
                       {project.title}
                     </h3>
                   </div>
-                  <p className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.2em]">
+                  <p className="text-[10px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.2em]">
                     {project.subtitle}
                   </p>
                 </div>
 
-                <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed mb-8">
+                <p className="text-neutral-500 dark:text-neutral-400 text-[14px] leading-relaxed mb-8">
                   {project.description}
                 </p>
 
                 <div className="mt-auto">
                   <div className="flex flex-wrap gap-2 mb-6">
                     {project.tech.map((t) => (
-                      <span key={t} className="text-[11px] font-black uppercase tracking-wider px-3 py-1 rounded-full bg-neutral-100 dark:bg-white/5 text-neutral-500 dark:text-neutral-400 border border-neutral-200/50 dark:border-white/5 hover:border-black dark:hover:border-white transition-all cursor-default">
+                      <span key={t} className="text-[10px] font-semibold uppercase tracking-wider px-3 py-1.5 rounded-xl bg-white dark:bg-white/5 text-neutral-600 dark:text-neutral-400 border border-neutral-200/50 dark:border-white/5 hover:border-black dark:hover:border-white transition-all cursor-default shadow-sm">
                         {t}
                       </span>
                     ))}
                   </div>
                   <div className="flex items-center justify-between pt-4 border-t border-neutral-200/50 dark:border-white/5">
-                    <span className="text-xs font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">{project.stats}</span>
-                    <span className="text-xs font-medium text-neutral-400 dark:text-neutral-500">{project.date}</span>
+                    <span className="text-[11px] font-bold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider">{project.stats}</span>
+                    <span className="text-xs font-semibold text-neutral-400 dark:text-neutral-500">{project.date}</span>
                   </div>
                 </div>
               </div>

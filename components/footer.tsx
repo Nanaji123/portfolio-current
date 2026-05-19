@@ -4,6 +4,7 @@ import React from "react"
 import { motion } from "framer-motion"
 import { GithubLogo, LinkedinLogo, InstagramLogo, TwitterLogo, ArrowUpRight, EnvelopeSimple } from "@phosphor-icons/react"
 import Link from "next/link"
+import { ContactModal } from "@/components/contact-modal"
 
 const SOCIAL_LINKS = [
   {
@@ -43,6 +44,7 @@ const NAV_LINKS = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const [isContactOpen, setIsContactOpen] = React.useState(false)
 
   return (
     <footer className="relative w-full overflow-hidden pt-24 pb-12">
@@ -90,6 +92,17 @@ export function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">Navigation</h4>
             <div className="flex flex-col gap-4">
               {NAV_LINKS.map((link) => {
+                if (link.name === "Contact") {
+                  return (
+                    <button
+                      key={link.name}
+                      onClick={() => setIsContactOpen(true)}
+                      className="text-sm font-medium text-neutral-600 dark:text-neutral-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1 group w-fit cursor-pointer"
+                    >
+                      {link.name}
+                    </button>
+                  )
+                }
                 const isExternal = link.url.startsWith("http") || link.url.startsWith("mailto:")
                 const Comp = isExternal ? "a" : Link
                 return (
@@ -112,13 +125,13 @@ export function Footer() {
           <div className="flex flex-col gap-6">
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500">Get in touch</h4>
             <div className="flex flex-col gap-4">
-              <a
-                href="mailto:gundapunanaji123@gmail.com"
-                className="group flex items-center justify-between gap-4 px-6 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black transition-all hover:scale-105 active:scale-95 w-fit shadow-xl shadow-black/5"
+              <button
+                onClick={() => setIsContactOpen(true)}
+                className="group flex items-center justify-between gap-4 px-6 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black transition-all hover:scale-105 active:scale-95 w-fit shadow-xl shadow-black/5 cursor-pointer"
               >
                 <span className="text-sm font-bold uppercase tracking-widest whitespace-nowrap">Tap to connect</span>
                 <ArrowUpRight size={18} weight="bold" className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </a>
+              </button>
               <p className="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed font-medium">
                 Available for interesting opportunities and collaboration worldwide.
               </p>
@@ -146,6 +159,7 @@ export function Footer() {
           </div>
         </div>
       </div>
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </footer>
   )
 }

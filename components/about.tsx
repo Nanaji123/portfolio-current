@@ -27,17 +27,17 @@ export function About() {
 
           <div className="flex flex-col gap-8">
             <p className="text-2xl sm:text-3xl font-medium leading-tight text-neutral-800 dark:text-neutral-200">
-              I&apos;m a <span className="text-black dark:text-white font-semibold underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Mobile App Developer</span> and <span className="text-black dark:text-white font-semibold underline underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Web Developer</span> experienced in building cross-platform applications for Android, iOS, and the web.
+              I&apos;m a <span className="text-black dark:text-white font-semibold underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Mobile Application Developer</span> and <span className="text-black dark:text-white font-semibold underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Full-Stack Engineer</span> with 2+ years of experience building real-time, scalable applications.
             </p>
 
             <div className="space-y-6 text-neutral-600 dark:text-neutral-400 text-lg sm:text-xl leading-relaxed">
               <p>
-                I specialize in creating scalable and user-focused solutions using modern technologies. I develop mobile apps with <span className="text-black dark:text-white font-medium">React Native</span> and build web applications alongside backend services using <span className="text-black dark:text-white font-medium">Node.js (Express)</span> and <span className="text-black dark:text-white font-medium">Python FastAPI</span>.
+                I specialize in high-performance cross-platform development using <span className="text-black dark:text-white font-medium">React Native</span> and <span className="text-black dark:text-white font-medium">Kotlin</span> alongside modern web frameworks like <span className="text-black dark:text-white font-medium">React.js</span> and <span className="text-black dark:text-white font-medium">Next.js</span>. On the backend, I build robust, scalable architectures with <span className="text-black dark:text-white font-medium">Node.js (Express)</span>, <span className="text-black dark:text-white font-medium">FastAPI</span>, and relational databases.
               </p>
               <p>
-                I also handle the design side of my projects, creating interfaces from initial sketches to Figma designs, ensuring both functionality and user experience go hand in hand. I enjoy working across the full stack and bringing ideas to life through real-world applications.
+                From architecting real-time video calling features using <span className="text-black dark:text-white font-medium">WebRTC + Socket.IO</span> to engineering secure fintech workflows, I focus on performance optimization, clean MVVM/Redux state architecture, and delivering polished, intuitive UI/UX experiences.
               </p>
-            </div>
+            </div>  
 
             <div className="grid grid-cols-2 gap-8 pt-8 border-t border-neutral-100 dark:border-white/5">
               <div>
