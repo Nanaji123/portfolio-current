@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/", "/private/"],
       },
     ],
-    sitemap: "https://nanajigundapu.dev/sitemap.xml",
-    host: "https://nanajigundapu.dev",
+    sitemap: "https://nanajigundapu.vercel.app/sitemap.xml",
+    host: "https://nanajigundapu.vercel.app",
   }
 }

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Nanaji Gundapu \u2014 Mobile App Developer & Full-Stack Engineer. Specializing in React Native, Kotlin, Next.js, WebRTC real-time systems, and scalable backend APIs.",
   alternates: {
-    canonical: "https://nanajigundapu.dev",
+    canonical: "https://nanajigundapu.vercel.app",
   },
 }
 
@@ -22,8 +22,8 @@ const structuredData = [
     name: "Nanaji Gundapu",
     givenName: "Nanaji",
     familyName: "Gundapu",
-    url: "https://nanajigundapu.dev",
-    image: "https://nanajigundapu.dev/pic.jpeg",
+    url: "https://nanajigundapu.vercel.app",
+    image: "https://nanajigundapu.vercel.app/pic.jpeg",
     sameAs: [
       "https://github.com/Nanaji123",
       "https://www.linkedin.com/in/nanaji-gundapu-ab5935264/",
@@ -79,7 +79,7 @@ const structuredData = [
     name: "Nanaji Gundapu — Freelance Mobile & Web Development",
     description:
       "Freelance mobile and web development services by Nanaji Gundapu. Available for React Native apps, Kotlin Android apps, Next.js web apps, real-time WebRTC systems, and Node.js backend APIs.",
-    url: "https://nanajigundapu.dev",
+    url: "https://nanajigundapu.vercel.app",
     provider: { "@type": "Person", name: "Nanaji Gundapu" },
     areaServed: "Worldwide",
     availableLanguage: ["English", "Telugu", "Hindi"],

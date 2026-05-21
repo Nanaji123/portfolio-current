@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 import OnekoCat from "@/components/OnekoCat"
 import React from 'react'
 
-const SITE_URL = "https://nanajigundapu.dev"
+const SITE_URL = "https://nanajigundapu.vercel.app"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
