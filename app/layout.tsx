@@ -86,6 +86,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning className={cn("antialiased", fontSans.variable, fontDisplay.variable)}>
       <body className="min-h-screen">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-[60] focus:rounded-full focus:bg-foreground focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-background"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
           <Navbar />
           {children}

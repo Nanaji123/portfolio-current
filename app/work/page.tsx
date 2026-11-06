@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function WorkPage() {
   return (
-    <main>
+    <main id="main">
       <Experience />
       <Contact />
     </main>

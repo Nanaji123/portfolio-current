@@ -40,7 +40,7 @@ const structuredData = {
 
 export default function Page() {
   return (
-    <main>
+    <main id="main">
       <Hero />
       <Work />
       <Experience />

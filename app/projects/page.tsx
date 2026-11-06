@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="pt-8 lg:pt-12">
+    <main id="main" className="pt-8 lg:pt-12">
       <Work />
       <Contact />
     </main>
