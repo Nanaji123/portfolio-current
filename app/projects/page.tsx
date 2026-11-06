@@ -1,28 +1,26 @@
 import type { Metadata } from "next"
-import { Projects } from "@/components/projects"
+
+import { Work } from "@/components/work"
+import { Contact } from "@/components/contact"
+import { SITE_URL } from "@/lib/data"
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Work",
   description:
-    "Explore Nanaji Gundapu's portfolio of real-world projects: SyncFlow (real-time chat & AI platform), ChronoScape (Android wallpaper engine), NoteSnap.app (AI study assistant), and more.",
-  alternates: {
-    canonical: "https://nanajigundapu.vercel.app/projects",
-  },
+    "Work by Nanaji Gundapu: the BuzinessAI app and its native image editor, Gym Helper, Salary Survival, and Funzone at Sisiya EdTech.",
+  alternates: { canonical: `${SITE_URL}/projects` },
   openGraph: {
-    title: "Projects \u2014 Nanaji Gundapu",
-    description:
-      "Real-world projects built with React Native, Kotlin, Next.js, Socket.IO, and AI integrations.",
-    url: "https://nanajigundapu.vercel.app/projects",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Projects" }],
+    title: "Work · Nanaji Gundapu",
+    description: "Production mobile apps built with React Native, Skia, Kotlin, Next.js and Convex.",
+    url: `${SITE_URL}/projects`,
   },
 }
 
 export default function ProjectsPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303]">
-      <div className="pt-24 pb-12">
-        <Projects />
-      </div>
+    <main className="pt-8 lg:pt-12">
+      <Work />
+      <Contact />
     </main>
   )
 }

@@ -1,67 +1,103 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+
+import { PROFILE } from "@/lib/data"
 import { cn } from "@/lib/utils"
-import { ContactModal } from "./contact-modal"
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from "@/components/ui/tooltip"
+import { Container } from "@/components/ui/base"
+
+const NAV = [
+  { name: "Work", id: "work" },
+  { name: "Experience", id: "experience" },
+  { name: "About", id: "about" },
+  { name: "Contact", id: "contact" },
+]
+
+const RESUME_LINK = { target: "_blank", rel: "noopener noreferrer", href: PROFILE.resume }
 
 export function Navbar() {
-  const pathname = usePathname()
-  const [isContactOpen, setIsContactOpen] = useState(false)
+  const [active, setActive] = useState<string | null>(null)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  // Marks the section currently in the middle of the screen
+  useEffect(() => {
+    const sections = NAV.flatMap(({ id }) => document.getElementById(id) ?? [])
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActive(entry.target.id)
+          else setActive((current) => (current === entry.target.id ? null : current))
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <header className="fixed top-6 left-0 right-0 z-50 mx-auto w-[95%] max-w-2xl">
-      <nav className="flex items-center justify-between rounded-full border border-neutral-200 bg-white/80 p-2 shadow-sm backdrop-blur-md transition-colors dark:border-white/10 dark:bg-black/50">
-        <a href="/" className="flex items-center gap-3 pl-2 group cursor-pointer relative z-10">
-          {/* Avatar Placeholder */}
-          <div className="h-8 w-8 overflow-hidden rounded-full bg-neutral-100 dark:bg-neutral-800">
-            <div className="flex h-full w-full items-center justify-center text-[10px] font-bold text-neutral-400">
-              ME
-            </div>
-          </div>
-          <span className="text-sm font-semibold text-black dark:text-white group-hover:opacity-80 transition-opacity">Nanaji gundapu</span>
-        </a>
+    <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-lg">
+      <Container className="flex h-16 items-center justify-between gap-4">
+        <Link href="/" className="whitespace-nowrap text-[15px] font-medium tracking-tight">
+          {PROFILE.name}
+        </Link>
 
-        <div className="hidden items-center gap-6 md:flex">
-          {[
-            { name: "Home", href: "/" },
-            { name: "Blogs", href: "/blogs" },
-            { name: "Projects", href: "/projects" },
-            { name: "Work", href: "/work" },
-          ].map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={cn(
-                "text-xs font-semibold uppercase tracking-wider transition-colors hover:text-black dark:hover:text-white",
-                pathname === item.href ? "text-black dark:text-white" : "text-neutral-400 dark:text-neutral-500"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-        </div>
+        <div className="flex items-center gap-3 text-sm text-muted-foreground sm:gap-7">
+          <nav aria-label="Main" className="hidden items-center gap-7 sm:flex">
+            {NAV.map(({ name, id }) => (
+              <Link
+                key={id}
+                href={`/#${id}`}
+                aria-current={active === id ? "true" : undefined}
+                className={cn("transition-colors hover:text-foreground", active === id && "text-foreground")}
+              >
+                {name}
+              </Link>
+            ))}
+            <a {...RESUME_LINK} className="transition-colors hover:text-foreground">
+              Résumé
+            </a>
+          </nav>
 
-        <div className="flex items-center gap-2">
-          <AnimatedThemeToggler />
+          <AnimatedThemeToggler
+            aria-label="Toggle theme"
+            className="grid size-8 place-items-center rounded-full transition-colors hover:text-foreground sm:-mr-2 [&_svg]:size-[15px]"
+          />
+
           <button
-            onClick={() => setIsContactOpen(true)}
-            className="rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm font-medium text-black transition-colors hover:bg-neutral-50 dark:border-white/10 dark:bg-black dark:text-white dark:hover:bg-neutral-900 cursor-pointer"
+            type="button"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            className="text-foreground sm:hidden"
           >
-            Contact
+            {menuOpen ? "Close" : "Menu"}
           </button>
         </div>
-      </nav>
+      </Container>
 
-      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
+      {menuOpen && (
+        <nav id="mobile-menu" aria-label="Mobile" className="sm:hidden">
+          <Container className="pb-4">
+            <ul className="border-t border-border text-[17px]">
+              {NAV.map(({ name, id }) => (
+                <li key={id} className="border-b border-border">
+                  <Link href={`/#${id}`} onClick={() => setMenuOpen(false)} className="block py-3.5">
+                    {name}
+                  </Link>
+                </li>
+              ))}
+              <li className="border-b border-border">
+                <a {...RESUME_LINK} onClick={() => setMenuOpen(false)} className="block py-3.5">
+                  Résumé
+                </a>
+              </li>
+            </ul>
+          </Container>
+        </nav>
+      )}
     </header>
   )
 }

@@ -1,3 +1,3 @@
 export const catConfig = {
-    enabled: true, // Set to false to disable the cat
+    enabled: false, // Set to true to bring the cursor-chasing cat back
 };

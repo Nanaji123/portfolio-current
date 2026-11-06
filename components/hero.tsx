@@ -1,260 +1,89 @@
-"use client"
-
 import React from "react"
-import Link from "next/link"
-import { CalendarIcon, HomeIcon, MailIcon, PencilIcon, Search, Settings } from "lucide-react"
-import { usePathname } from "next/navigation"
+import Image from "next/image"
 
-
+import { METRICS, PROFILE, SOCIALS } from "@/lib/data"
 import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Meteors } from "@/components/ui/meteors"
-import { Dock, DockIcon } from "@/components/ui/dock"
-import { Separator } from "@/components/ui/separator"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
-import { MorphingText } from "@/components/ui/morphing-text"
-import { motion } from "framer-motion"
+import { Container, TextLink } from "@/components/ui/base"
 
-export type IconProps = React.HTMLAttributes<SVGElement>
+const delay = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties
 
-const Icons = {
-  calendar: (props: IconProps) => <CalendarIcon {...props} />,
-  email: (props: IconProps) => <MailIcon {...props} />,
-  linkedin: (props: IconProps) => (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <title>LinkedIn</title>
-      <path
-        fill="currentColor"
-        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-      />
-    </svg>
-  ),
-  x: (props: IconProps) => (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <title>X</title>
-      <path
-        fill="currentColor"
-        d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
-      />
-    </svg>
-  ),
-  youtube: (props: IconProps) => (
-    <svg
-      width="32px"
-      height="32px"
-      viewBox="0 0 32 32"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}
-    >
-      <title>youtube</title>
-      <path d="M29.41,9.26a3.5,3.5,0,0,0-2.47-2.47C24.76,6.2,16,6.2,16,6.2s-8.76,0-10.94.59A3.5,3.5,0,0,0,2.59,9.26,36.13,36.13,0,0,0,2,16a36.13,36.13,0,0,0,.59,6.74,3.5,3.5,0,0,0,2.47,2.47C7.24,25.8,16,25.8,16,25.8s8.76,0,10.94-.59a3.5,3.5,0,0,0,2.47-2.47A36.13,36.13,0,0,0,30,16,36.13,36.13,0,0,0,29.41,9.26ZM13.2,20.2V11.8L20.47,16Z" />
-    </svg>
-  ),
-  github: (props: IconProps) => (
-    <svg viewBox="0 0 438.549 438.549" {...props}>
-      <path
-        fill="currentColor"
-        d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z"
-      ></path>
-    </svg>
-  ),
-}
-
-const DATA = {
-  navbar: [
-    { href: "/", icon: HomeIcon, label: "Home" },
-    { href: "/blogs", icon: PencilIcon, label: "Blog" },
-  ],
-  contact: {
-    social: {
-      GitHub: {
-        name: "GitHub",
-        url: "https://github.com/Nanaji123",
-        icon: Icons.github,
-      },
-      LinkedIn: {
-        name: "LinkedIn",
-        url: "https://www.linkedin.com/in/nanaji-gundapu-ab5935264/",
-        icon: Icons.linkedin,
-      },
-      X: {
-        name: "X",
-        url: "https://x.com/GNanaji9",
-        icon: Icons.x,
-      },
-      email: {
-        name: "Send Email",
-        url: "mailto:gundapunanaji123@gmail.com",
-        icon: Icons.email,
-      },
-    },
-  },
-}
 export function Hero() {
-  const [mounted, setMounted] = React.useState(false);
-  const pathname = usePathname();
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
-    <section className="relative flex min-h-0 pt-40 sm:pt-64 pb-16 sm:pb-24 p-6 justify-center items-center overflow-hidden">
-      {/* Vertical Dashed Lines (Matching Footer) */}
-      <div className="absolute top-0 left-1/2 -translate-x-[600px] h-full w-[1px] border-l border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
-      <div className="absolute top-0 right-1/2 translate-x-[600px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
-
-      <Meteors number={15} />
-      <div className="relative z-10 w-full max-w-[1200px] mx-auto min-w-0 flex flex-col lg:flex-row items-center justify-between gap-12 lg:px-10 xl:px-16">
-        <div className="flex flex-col items-start gap-4 flex-1">
-          <div className="inline-flex items-center gap-2 rounded-full border border-neutral-100 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600 dark:border-white/5 dark:bg-white/5 dark:text-neutral-400">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-900 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-            </span>
-            Always online
+    <section id="top" className="pb-16 pt-10 sm:pt-16 lg:pb-24 lg:pt-14">
+      <Container>
+        {/* The portrait stretches to the text column, so its top and bottom line up with the copy */}
+        <div className="grid gap-x-16 gap-y-7 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_390px]">
+          <div
+            className="enter relative order-first size-[88px] overflow-hidden rounded-full bg-muted lg:order-last lg:size-auto lg:min-h-[440px] lg:rounded-2xl"
+            style={delay(120)}
+          >
+            <Image
+              src={PROFILE.photo}
+              alt={`Portrait of ${PROFILE.name}`}
+              fill
+              priority
+              quality={90}
+              sizes="(min-width: 1280px) 390px, (min-width: 1024px) 320px, 88px"
+              className="object-cover object-[50%_20%]"
+            />
           </div>
 
-          <div className="flex flex-col gap-6 items-start w-full">
-            <h1 className="flex flex-wrap items-center justify-start gap-x-3 text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight dark:text-white leading-tight">
-              <span className="shrink-0 whitespace-nowrap">I&apos;m a</span>
-              <MorphingText
-                className="text-left mx-0 h-10 sm:h-12 lg:h-14 text-2xl sm:text-4xl lg:text-5xl dark:text-white inline-block w-fit min-w-[180px] sm:min-w-[300px] whitespace-nowrap"
-                texts={["Mobile App Developer", "Full-Stack Developer", "Web Developer"]}
-              />
+          <div className="min-w-0">
+            <p className="enter text-[15px] text-muted-foreground">
+              {PROFILE.role}, Hyderabad · <span className="text-foreground">{PROFILE.availability}</span>
+            </p>
+
+            <h1
+              className="enter mt-5 max-w-[15ch] text-balance font-display text-[clamp(2.75rem,6.1vw,5.1rem)] font-normal leading-[1.02] tracking-[-0.022em] lg:mt-6"
+              style={delay(60)}
+            >
+              I build mobile apps that feel native and hold up in production.
             </h1>
 
-            <div className="flex flex-col gap-2 max-w-xl items-start text-left">
-              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
-                Engineering high-performance, cross-platform mobile and web applications.
-              </p>
-              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
-                Architecting robust backend services, real-time systems, and scalable APIs.
-              </p>
-              <p className="text-neutral-500 dark:text-neutral-400 text-base sm:text-lg font-medium leading-relaxed lg:whitespace-nowrap">
-                Combining clean architectures with fluid, high-fidelity user experiences.
-              </p>
+            <p
+              className="enter mt-7 max-w-[58ch] text-pretty text-[17px] leading-[1.65] text-muted-foreground lg:mt-8"
+              style={delay(140)}
+            >
+              I&apos;m <span className="text-foreground">{PROFILE.name}</span>, the primary engineer on the BuzinessAI
+              app at {PROFILE.company}, where I build the app, the APIs behind it and its payment integrations. In 3
+              years I&apos;ve shipped fintech, EdTech and real-time products with React Native, Kotlin, Node.js and
+              PostgreSQL.
+            </p>
+
+            <div
+              className="enter mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-[15px] lg:mt-9"
+              style={delay(200)}
+            >
+              <TextLink href={SOCIALS.email}>Email</TextLink>
+              <TextLink href={PROFILE.resume}>Résumé</TextLink>
+              <TextLink href={SOCIALS.linkedin}>LinkedIn</TextLink>
+              <TextLink href={SOCIALS.github}>GitHub</TextLink>
             </div>
           </div>
+        </div>
 
-          {mounted && (
-            <div className="mt-8 flex flex-col items-start gap-4">
-              <TooltipProvider>
-                <Dock direction="middle" className="p-2 border border-neutral-200 bg-white/50 dark:border-white/10 dark:bg-black/50">
-                  {DATA.navbar.map((item) => {
-                    const isActive = pathname === item.href
-                    return (
-                      <DockIcon key={item.label}>
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Link
-                              href={item.href}
-                              aria-label={item.label}
-                              className={cn(
-                                buttonVariants({ variant: "ghost", size: "icon" }),
-                                "size-12 rounded-full transition-all relative",
-                                isActive && "bg-neutral-100 dark:bg-white/10 text-black dark:text-white"
-                              )}
-                            >
-                              <item.icon className={cn("size-4", isActive && "scale-110")} />
-                              {isActive && (
-                                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-black dark:bg-white" />
-                              )}
-                            </Link>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{item.label}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </DockIcon>
-                    )
-                  })}
-                  <Separator orientation="vertical" className="h-full mx-2" />
-                  {Object.entries(DATA.contact.social).map(([name, social]) => {
-                    const isExternal = social.url.startsWith("http") || social.url.startsWith("mailto:")
-                    const Comp = isExternal ? "a" : Link
-                    return (
-                      <DockIcon key={name}>
-                        <Tooltip>
-                          <TooltipTrigger>
-                            <Comp
-                              href={social.url}
-                              aria-label={social.name}
-                              className={cn(
-                                buttonVariants({ variant: "ghost", size: "icon" }),
-                                "size-12 rounded-full"
-                              )}
-                              {...(isExternal ? { target: social.url.startsWith("mailto:") ? undefined : "_blank", rel: "noopener noreferrer" } : {})}
-                            >
-                              <social.icon className="size-4" />
-                            </Comp>
-                          </TooltipTrigger>
-                          <TooltipContent>
-                            <p>{name}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </DockIcon>
-                    )
-                  })}
-                </Dock>
-              </TooltipProvider>
-              <a
-                href="https://drive.google.com/file/d/1H2iOvaxKD_ZDwkcnJklMbDWK9M6QQN8g/view?usp=drive_link"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-3 px-6 py-3 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
-              >
-                {/* Gradient border via pseudo background */}
-                <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-neutral-800 via-neutral-600 to-neutral-800 dark:from-white/20 dark:via-white/10 dark:to-white/20 p-[1.5px]">
-                  <span className="absolute inset-[1.5px] rounded-[14px] bg-white dark:bg-[#0a0a0a]" />
-                </span>
-                {/* Shimmer sweep on hover */}
-                <span className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[linear-gradient(105deg,transparent_40%,rgba(0,0,0,0.06)_50%,transparent_60%)] dark:bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.06)_50%,transparent_60%)] bg-[length:200%_100%] animate-[shimmer_1.5s_infinite]" />
-                {/* Icon */}
-                <span className="relative z-10 flex items-center justify-center w-7 h-7 rounded-lg bg-black dark:bg-white group-hover:scale-110 transition-transform duration-300 shadow-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="size-3.5 text-white dark:text-black group-hover:translate-y-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16" />
-                  </svg>
-                </span>
-                {/* Text */}
-                <span className="relative z-10 flex flex-col items-start leading-none">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-400 dark:text-neutral-500">View / Download</span>
-                  <span className="text-sm font-black uppercase tracking-wider text-black dark:text-white mt-0.5">Resume / CV</span>
-                </span>
-                {/* Arrow */}
-                <span className="relative z-10 ml-1 opacity-40 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-black dark:text-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </a>
+        <dl
+          className="enter mt-12 grid grid-cols-2 border-t border-border lg:mt-14 lg:grid-cols-4"
+          style={delay(260)}
+        >
+          {METRICS.map((m, i) => (
+            <div
+              key={m.label}
+              className={cn(
+                "flex flex-col gap-1 py-5 lg:py-6",
+                i % 2 === 1 && "border-l border-border pl-5",
+                i >= 2 && "border-t border-border lg:border-t-0",
+                i >= 1 && "lg:border-l lg:pl-6"
+              )}
+            >
+              <dt className="order-2 pr-3 text-sm leading-snug text-muted-foreground">{m.label}</dt>
+              <dd className="order-1 font-display text-[2.1rem] leading-none tracking-[-0.02em] tabular-nums lg:text-[2.5rem]">
+                {m.value}
+              </dd>
             </div>
-          )}
-        </div>
-
-        {/* Decorative Image */}
-        <div className="flex flex-1 justify-center lg:justify-end items-center relative order-first lg:order-last mb-12 lg:mb-0">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-gradient-to-tr from-neutral-200 to-transparent dark:from-white/10 dark:to-transparent rounded-3xl blur-2xl opacity-50" />
-            <img
-              src="/heropic.png"
-              alt="Profile Illustration"
-              className="relative z-10 w-full max-w-[300px] sm:max-w-[450px] lg:max-w-[600px] ml-auto object-contain drop-shadow-2xl hover:scale-[1.02] transition-transform duration-500"
-            />
-          </motion.div>
-        </div>
-      </div>
+          ))}
+        </dl>
+      </Container>
     </section>
   )
 }

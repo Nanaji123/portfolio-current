@@ -6,8 +6,9 @@
 
 @theme inline {
   --font-sans: var(--font-sans);
-  --font-heading: var(--font-sans);
-  --font-mono: var(--font-mono);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+  --color-panel: var(--panel);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -16,11 +17,6 @@
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -44,104 +40,71 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-  --animate-meteor: meteor 5s linear infinite;
-
-  @keyframes meteor {
-    0% {
-      transform: rotate(var(--angle)) translateX(0);
-      opacity: 1;
-    }
-
-    70% {
-      opacity: 1;
-    }
-
-    100% {
-      transform: rotate(var(--angle)) translateX(-500px);
-      opacity: 0;
-    }
-  }
-
-  @keyframes shimmer {
-    0% {
-      background-position: 200% center;
-    }
-
-    100% {
-      background-position: -200% center;
-    }
-  }
 }
 
+/*
+ * The interface is monochrome on purpose. The only colour on the page
+ * comes from the products themselves.
+ */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background: #fbfbf9;
+  --foreground: #161614;
+  --panel: #f0efeb;
+  --muted: #f0efeb;
+  --muted-foreground: #6c6b66;
+  --border: #e4e3de;
+  --card: #ffffff;
+  --card-foreground: #161614;
+  --popover: #ffffff;
+  --popover-foreground: #161614;
+  --primary: #161614;
+  --primary-foreground: #fbfbf9;
+  --secondary: #f0efeb;
+  --secondary-foreground: #161614;
+  --accent: #f0efeb;
+  --accent-foreground: #161614;
+  --destructive: #b42318;
+  --input: #e4e3de;
+  --ring: #161614;
+  --radius: 0.75rem;
+  --sidebar: #fbfbf9;
+  --sidebar-foreground: #161614;
+  --sidebar-primary: #161614;
+  --sidebar-primary-foreground: #fbfbf9;
+  --sidebar-accent: #f0efeb;
+  --sidebar-accent-foreground: #161614;
+  --sidebar-border: #e4e3de;
+  --sidebar-ring: #161614;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #0c0c0b;
+  --foreground: #ecebe6;
+  --panel: #161615;
+  --muted: #1c1c1a;
+  --muted-foreground: #96958f;
+  --border: #262624;
+  --card: #161615;
+  --card-foreground: #ecebe6;
+  --popover: #161615;
+  --popover-foreground: #ecebe6;
+  --primary: #ecebe6;
+  --primary-foreground: #0c0c0b;
+  --secondary: #1c1c1a;
+  --secondary-foreground: #ecebe6;
+  --accent: #1c1c1a;
+  --accent-foreground: #ecebe6;
+  --destructive: #f97066;
+  --input: #262624;
+  --ring: #ecebe6;
+  --sidebar: #0c0c0b;
+  --sidebar-foreground: #ecebe6;
+  --sidebar-primary: #ecebe6;
+  --sidebar-primary-foreground: #0c0c0b;
+  --sidebar-accent: #1c1c1a;
+  --sidebar-accent-foreground: #ecebe6;
+  --sidebar-border: #262624;
+  --sidebar-ring: #ecebe6;
 }
 
 @layer base {
@@ -149,12 +112,304 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
-    @apply bg-background text-foreground;
-  }
-
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--foreground);
+    color: var(--background);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* A single, quiet entrance for the hero. CSS only, so nothing depends on JS to be visible. */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.enter {
+  animation: enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--enter-delay, 0ms);
+}
+
+/* Product images settle as they scroll into view. Browsers without scroll timelines show them as is. */
+@supports (animation-timeline: view()) {
+  @keyframes settle {
+    from {
+      opacity: 0.35;
+      transform: translateY(28px);
+    }
+  }
+  .settle {
+    animation: settle linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 55%;
+  }
+}
+
+/* Horizontal phone rows on small screens: swipe, no visible scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/*
+ * ChronoScape preview. Four sky phases crossfade over a 16s "day", and everything
+ * else (sun, moon, stars, hills, the clock) keeps time with them.
+ */
+@keyframes cs-phase {
+  0% {
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  31% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.cs-phase {
+  animation: cs-phase 16s linear infinite;
+}
+
+@keyframes cs-sun-orbit {
+  from {
+    transform: rotate(-112.5deg);
+  }
+  to {
+    transform: rotate(247.5deg);
+  }
+}
+@keyframes cs-moon-orbit {
+  from {
+    transform: rotate(67.5deg);
+  }
+  to {
+    transform: rotate(427.5deg);
+  }
+}
+.cs-sun-arm,
+.cs-moon-arm {
+  transform-box: view-box;
+  transform-origin: 141px 435px;
+}
+.cs-sun-arm {
+  animation: cs-sun-orbit 16s linear infinite;
+}
+.cs-moon-arm {
+  animation: cs-moon-orbit 16s linear infinite;
+}
+
+@keyframes cs-twinkle {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.cs-twinkle {
+  animation: cs-twinkle 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes cs-drift {
+  from {
+    transform: translateX(-110px);
+  }
+  to {
+    transform: translateX(380px);
+  }
+}
+.cs-drift {
+  animation: cs-drift 46s linear infinite;
+}
+
+@keyframes cs-clouds {
+  0% {
+    opacity: 0.6;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  55% {
+    opacity: 0.9;
+  }
+  66% {
+    opacity: 0.45;
+  }
+  80% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+.cs-clouds {
+  animation: cs-clouds 16s linear infinite;
+}
+
+/* The tree falls into silhouette through dusk and night */
+@keyframes cs-dim {
+  0% {
+    opacity: 0.45;
+  }
+  10% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  62% {
+    opacity: 0.55;
+  }
+  78% {
+    opacity: 0.88;
+  }
+  100% {
+    opacity: 0.45;
+  }
+}
+.cs-dim {
+  animation: cs-dim 16s linear infinite;
+}
+
+@keyframes cs-sway {
+  from {
+    transform: rotate(-1.3deg);
+  }
+  to {
+    transform: rotate(1.3deg);
+  }
+}
+.cs-sway {
+  transform-box: view-box;
+  transform-origin: 150px 497px;
+  animation: cs-sway 4.5s ease-in-out infinite alternate;
+}
+
+/* The tree grows as the phone scrolls into view */
+@supports (animation-timeline: view()) {
+  .cs-scene {
+    view-timeline-name: --cs-scene;
+  }
+  @keyframes cs-grow {
+    from {
+      transform: scale(0.45);
+    }
+  }
+  .cs-grow {
+    transform-box: view-box;
+    transform-origin: 150px 497px;
+    animation: cs-grow linear both;
+    animation-timeline: --cs-scene;
+    animation-range: entry 35% cover 60%;
+  }
+}
+
+/* Video call preview: the live dot, the speaker's ring and level meter, a line drawn on the board */
+@keyframes vc-live {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+.vc-live {
+  animation: vc-live 1.4s ease-in-out infinite;
+}
+
+@keyframes vc-speaking {
+  0%,
+  100% {
+    box-shadow: 0 0 0 calc(var(--u) * 1.5) rgb(52 211 153 / 0.9);
+  }
+  50% {
+    box-shadow: 0 0 0 calc(var(--u) * 3.5) rgb(52 211 153 / 0.35);
+  }
+}
+.vc-speaking {
+  box-shadow: 0 0 0 calc(var(--u) * 1.5) rgb(52 211 153 / 0.9);
+  animation: vc-speaking 1.6s ease-in-out infinite;
+}
+
+@keyframes vc-bar {
+  0%,
+  100% {
+    transform: scaleY(0.35);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+.vc-bar {
+  transform-origin: bottom;
+  animation: vc-bar 0.9s ease-in-out infinite;
+}
+
+@keyframes vc-draw {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  35%,
+  85% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+.vc-draw {
+  stroke-dasharray: 100;
+  animation: vc-draw 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .vc-live,
+  .vc-speaking,
+  .vc-bar,
+  .vc-draw,
+  .enter,
+  .settle,
+  .cs-phase,
+  .cs-sun-arm,
+  .cs-moon-arm,
+  .cs-twinkle,
+  .cs-drift,
+  .cs-clouds,
+  .cs-dim,
+  .cs-sway,
+  .cs-grow {
+    animation: none !important;
   }
 }
 

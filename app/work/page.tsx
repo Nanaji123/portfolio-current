@@ -1,28 +1,26 @@
 import type { Metadata } from "next"
+
 import { Experience } from "@/components/experience"
+import { Contact } from "@/components/contact"
+import { SITE_URL } from "@/lib/data"
 
 export const metadata: Metadata = {
-  title: "Work Experience",
+  title: "Experience",
   description:
-    "Nanaji Gundapu's professional work experience: Mobile Full-Stack Developer at Sisya EdTech, Fintech App Developer at Nest India, and Freelance Full-Stack Developer at CodeSel.com.",
-  alternates: {
-    canonical: "https://nanajigundapu.vercel.app/work",
-  },
+    "Nanaji Gundapu's experience: Senior Mobile Engineer at Galaxy Tech Solutions, Mobile Full-Stack Developer at Sisiya EdTech, and React Native Developer at Nest India.",
+  alternates: { canonical: `${SITE_URL}/work` },
   openGraph: {
-    title: "Work Experience \u2014 Nanaji Gundapu",
-    description:
-      "2+ years of professional experience across EdTech, Fintech, and freelance full-stack development.",
-    url: "https://nanajigundapu.vercel.app/work",
-    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Work Experience" }],
+    title: "Experience · Nanaji Gundapu",
+    description: "3 years building production mobile apps across fintech, EdTech and real-time platforms.",
+    url: `${SITE_URL}/work`,
   },
 }
 
 export default function WorkPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303]">
-      <div className="pt-24 pb-12">
-        <Experience />
-      </div>
+    <main>
+      <Experience />
+      <Contact />
     </main>
   )
 }

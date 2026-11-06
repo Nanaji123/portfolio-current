@@ -1,57 +1,47 @@
-"use client"
-
 import React from "react"
-import { motion } from "framer-motion"
+
+import { LANGUAGES, SKILLS } from "@/lib/data"
+import { Container, SectionHeading } from "@/components/ui/base"
+
+const ROW =
+  "grid grid-cols-[92px_minmax(0,1fr)] gap-x-3 border-b border-border py-3.5 text-[15px] leading-[1.5] sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-x-4"
 
 export function About() {
   return (
-    <section className="relative w-full py-24 sm:py-32 overflow-hidden">
-      {/* Vertical Dashed Lines (Matching Hero) */}
-      <div className="absolute top-0 left-1/2 -translate-x-[600px] h-full w-[1px] border-l border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
-      <div className="absolute top-0 right-1/2 translate-x-[600px] h-full w-[1px] border-r border-dashed border-neutral-300 dark:border-white/30 hidden lg:block [mask-image:linear-gradient(to_bottom,transparent,black_50%,transparent)]" />
+    <section id="about" className="scroll-mt-20 py-16 lg:py-24">
+      <Container>
+        <SectionHeading>About</SectionHeading>
 
-      <div className="mx-auto max-w-4xl px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="flex flex-col gap-12"
-        >
-          <div className="flex flex-col items-start gap-4">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-black dark:text-white uppercase">
-              About Me
-            </h2>
-            <div className="h-[2px] w-20 bg-neutral-900 dark:bg-white" />
-          </div>
-
-          <div className="flex flex-col gap-8">
-            <p className="text-2xl sm:text-3xl font-medium leading-tight text-neutral-800 dark:text-neutral-200">
-              I&apos;m a <span className="text-black dark:text-white font-semibold underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Mobile Application Developer</span> and <span className="text-black dark:text-white font-semibold underline-offset-4 decoration-neutral-300 dark:decoration-neutral-700">Full-Stack Engineer</span> with 2+ years of experience building real-time, scalable applications.
+        <div className="mt-8 grid gap-x-8 gap-y-10 lg:mt-12 lg:grid-cols-12">
+          <div className="space-y-5 text-pretty text-[17px] leading-[1.65] lg:sticky lg:top-24 lg:col-span-5 lg:self-start">
+            <p>
+              I&apos;ve spent 3 years on production apps across fintech, EdTech and real-time platforms, serving 5,000+
+              users.
             </p>
-
-            <div className="space-y-6 text-neutral-600 dark:text-neutral-400 text-lg sm:text-xl leading-relaxed">
-              <p>
-                I specialize in high-performance cross-platform development using <span className="text-black dark:text-white font-medium">React Native</span> and <span className="text-black dark:text-white font-medium">Kotlin</span> alongside modern web frameworks like <span className="text-black dark:text-white font-medium">React.js</span> and <span className="text-black dark:text-white font-medium">Next.js</span>. On the backend, I build robust, scalable architectures with <span className="text-black dark:text-white font-medium">Node.js (Express)</span>, <span className="text-black dark:text-white font-medium">FastAPI</span>, and relational databases.
-              </p>
-              <p>
-                From architecting real-time video calling features using <span className="text-black dark:text-white font-medium">WebRTC + Socket.IO</span> to engineering secure fintech workflows, I focus on performance optimization, clean MVVM/Redux state architecture, and delivering polished, intuitive UI/UX experiences.
-              </p>
-            </div>  
-
-            <div className="grid grid-cols-2 gap-8 pt-8 border-t border-neutral-100 dark:border-white/5">
-              <div>
-                <p className="text-xs text-neutral-400 dark:text-neutral-600 uppercase tracking-widest mb-2 font-bold">Focus</p>
-                <p className="text-base font-medium text-neutral-800 dark:text-neutral-200">Web/Mobile Architecture, System Design</p>
-              </div>
-              <div>
-                <p className="text-xs text-neutral-400 dark:text-neutral-600 uppercase tracking-widest mb-2 font-bold">Location</p>
-                <p className="text-base font-medium text-neutral-800 dark:text-neutral-200">Visakapatnam, Andhra Pradesh</p>
-              </div>
-            </div>
+            <p className="text-muted-foreground">
+              I&apos;m most useful when a feature crosses the stack: a Kotlin module, a WebRTC session, a payment webhook,
+              a PostgreSQL schema or a Skia renderer. I care about frame rate, clean module boundaries and what happens
+              after release.
+            </p>
           </div>
-        </motion.div>
-      </div>
+
+          <dl className="border-t border-border lg:col-span-7">
+            {SKILLS.map((s) => (
+              <div key={s.group} className={ROW}>
+                <dt className="text-muted-foreground">{s.group}</dt>
+                <dd>
+                  {s.proof && <p className="mb-1 text-pretty">{s.proof}</p>}
+                  <p className={s.proof ? "text-sm text-muted-foreground" : undefined}>{s.items}</p>
+                </dd>
+              </div>
+            ))}
+            <div className={ROW}>
+              <dt className="text-muted-foreground">Languages</dt>
+              <dd>{LANGUAGES.join(", ")}</dd>
+            </div>
+          </dl>
+        </div>
+      </Container>
     </section>
   )
 }
